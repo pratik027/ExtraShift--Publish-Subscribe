@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  my-postgres-db:
+      build: db/
+      container_name: postgres-phase2
+      environment:
+        - POSTGRES_PASSWORD=root
+      ports:
+        - 6002:5432
+  
+  phase2-server:
+    build: server/
+    container_name: phase2-server
+    environment:
+      - DB_HOST=postgres-phase2
+    ports:
+      - 5002:80
